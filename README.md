@@ -11,13 +11,13 @@ $ pip3 install --user AISTool
 From github:
 
 ``` bash
-$ pip3 install --user git+https://github.com/rasjani/AISTool
+$ pip3 install --user git+https://github.com/hitchhooker/AISTool
 ```
 
 Local install
 
 ``` bash
-$ git clone https://github.com/rasjani/AISTool.git
+$ git clone https://github.com/hitchhooker/AISTool.git
 $ pip3 install .
 ```
 

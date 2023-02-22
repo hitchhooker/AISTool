@@ -18,17 +18,26 @@ package_name = os.path.basename(package_root)
 
 STATIC_VERSION_FILE = "_static_version.py"
 
-
 def get_version(version_file=STATIC_VERSION_FILE):
     version_info = get_static_version_info(version_file)
     version = version_info["version"]
     if version == "__use_git__":
-        version = get_version_from_git()
-        if not version:
+        # Add the following lines to get the latest tag from git
+        p = subprocess.Popen(
+            ["git", "describe", "--abbrev=0", "--tags"],
+            cwd=package_root,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        latest_tag = p.communicate()[0].decode().strip()
+        if latest_tag:
+            version = latest_tag
+        else:
             version = get_version_from_git_archive(version_info)
-        if not version:
-            version = Version("unknown", None, None)
-        return pep440_format(version)
+            if not version:
+                version = Version("unknown", None, None)
+            version = pep440_format(version)
+        return version
     else:
         return version
 

@@ -4,7 +4,7 @@ from pathlib import Path
 import os
 from importlib.util import module_from_spec, spec_from_file_location
 
-NAME="AISTool"
+NAME = "AISTool"
 CWD = Path(__file__).parent
 requirements_file = CWD / "requirements.txt"
 readme_file = CWD / "README.md"
